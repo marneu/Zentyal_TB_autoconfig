@@ -7,6 +7,6 @@ pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownContacts.noti
 pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownContacts.periodicSync", "true");
 pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownContacts.periodicSyncInterval", "120");
 pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownContacts.url", "http://[MAIL_HOST]/SOGo/dav/[USER_NAME]/Contacts/personal/");
-pref("ldap_2.servers.ownContacts.description", "Meine Kontakte");
+pref("ldap_2.servers.ownContacts.description", "My contacts");
 pref("ldap_2.servers.ownContacts.dirType", 2);
 pref("ldap_2.servers.ownContacts.filename", "[ABOOK_ID].mab");
