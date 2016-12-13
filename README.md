@@ -16,7 +16,7 @@ for interactive testing on command line.
 
 For a Test put the ./mail/mozilla in your webserver dir like /var/www/html/.well-known/autoconfig/mail/mozilla and add the apache stanza to your local /etc/apache2/sites-available/000-default.conf
 
-* setup the .zentyalcredetials file (example is given using the manual testing call)
+* setup the `.zentyal-credentials` file (example is given using the manual testing call)
 * use the script zentyalconfig/createCredentialPass to get your password in the right fashion for the config file
 * use the output from `uuidgen` for the local base of your calendars.
 * test, test, test...
