@@ -1,0 +1,13 @@
+// users calendar
+pref("calendar.registry.[CAL_ID].cache.enabled", false);
+pref("calendar.registry.[CAL_ID].calendar-main-default", true);
+pref("calendar.registry.[CAL_ID].calendar-main-in-composite", true);
+pref("calendar.registry.[CAL_ID].color", "#ff8080");
+pref("calendar.registry.[CAL_ID].imip.identity.key", "id1");
+pref("calendar.registry.[CAL_ID].initialSortOrderPos", 1);
+pref("calendar.registry.[CAL_ID].name", "Mein Kalender");
+pref("calendar.registry.[CAL_ID].readOnly", false);
+pref("calendar.registry.[CAL_ID].refreshInterval", "30");
+pref("calendar.registry.[CAL_ID].suppressAlarms", false);
+pref("calendar.registry.[CAL_ID].type", "caldav");
+pref("calendar.registry.[CAL_ID].uri", "https://[MAIL_HOST]/SOGo/dav/[USER_NAME]/Calendar/personal/");
