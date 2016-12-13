@@ -26,6 +26,7 @@ Manually testing can be done on the command line using:
 > php zentylaconfig.php user=YoYo.Dine 2>&1 | less
 
 (Replace YoYo.Dine with a real configured user within Zentyal).
+For testing further do a softlink `ln -s /var/www/html/.well-known/autoconfig/mail /var/www/html/mail`
 
 Next test is within the browser, goto:
 > `http://pdc.zentyal.lan/mail/mozilla/zentyalconfig/win/yoyodine.corp`
