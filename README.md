@@ -26,10 +26,19 @@ Manually testing can be done on the command line using:
 > php zentylaconfig.php user=YoYo.Dine 2>&1 | less
 
 (Replace YoYo.Dine with a real configured user within Zentyal)
+Next test is within the browser, goto:
+> http://pdc.zentyal.lan/mail/mozilla/zentyalconfig/win/yoyodine.corp
 
-On the user side you will need to deploy the stuff from the win directory.
-Your Thunderbird dir on the windows side will be something like:
+You should see the prepared configuration for your TB.
+
+On the user (Win) side
+* Clear the %APPDATA%\Thunderbird\* directory and call thunderbird with params:
+You will need to deploy the stuff from the win directory here to the thunderbird program directory
+* Your Thunderbird dir on the windows side could be something like:
+
 > cd C:\Program Files (x86)\Mozilla Thunderbird\
 
-Clear the %APPDATA%\Thunderbird directory and call thunderbird with params:
 > thunderbird -CreateProfile "%USERNAME% %APPDIR%"
+
+Execute Thunderbird from the desktop and acknowledge all certificates, enter your identification and so on.
+I need to do further documentation on this and also on playing with defaultPref, lockPref and clearPref.
