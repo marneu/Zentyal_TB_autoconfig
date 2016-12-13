@@ -32,4 +32,4 @@ Your Thunderbird dir on the windows side will be something like:
 > cd C:\Program Files (x86)\Mozilla Thunderbird\
 
 Clear the %APPDATA%\Thunderbird directory and call thunderbird with params:
-thunderbird -CreateProfile "%USERNAME% %APPDIR%"
+> thunderbird -CreateProfile "%USERNAME% %APPDIR%"
