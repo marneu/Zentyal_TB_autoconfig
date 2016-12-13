@@ -1,0 +1,2 @@
+// sum of counted accounts
+pref("mail.accountmanager.accounts", "[ALL_ACCOUNTS]");
