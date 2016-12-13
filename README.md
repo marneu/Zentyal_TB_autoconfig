@@ -40,6 +40,9 @@ You will need to deploy the stuff from the win directory here to the thunderbird
 
 > cd C:\Program Files (x86)\Mozilla Thunderbird\
 
+(keep the structure below /win/, these dirs should all exist already.)
+And then recreate a basic Thunderbird user dir within %APPDATA%
+
 > thunderbird -CreateProfile "%USERNAME% %APPDIR%"
 
 Execute Thunderbird from the desktop and acknowledge all certificates, enter your identification and so on.
