@@ -1,0 +1,26 @@
+// user independent settings (all tb's)
+defaultPref("general.useragent.locale", "de");
+defaultPref("network.cookie.cookieBehavior", 3);
+defaultPref("network.cookie.lifetimePolicy", 2);
+defaultPref("network.cookie.prefsMigrated", true);
+defaultPref("network.predictor.cleaned-up", true);
+pref("toolkit.telemetry.rejected", true);
+pref("network.proxy.type", 4);
+pref("messenger.startup.action", 0);
+pref("mail.chat.enabled", false);
+pref("datareporting.policy.dataSubmissionEnabled", false);
+pref("pref.privacy.disable_button.view_passwords", true);
+pref("browser.startup.homepage_override.mstone","ignore");
+pref("calendar.timezone.local", "Europe/Berlin");
+pref("mail.root.imap-rel", "[ProfD]ImapMail");
+pref("mail.compose.big_attachments.notify", false);
+// review
+pref("pref.general.disable_button.default_mail", false);
+pref("mail.shell.checkDefaultClient", false);
+pref("mail.spam.logging.enabled", true);
+pref("mail.spam.manualMark", true);
+pref("mail.spam.markAsReadOnSpam", true);
+pref("mail.spam.version", 1);
+pref("mail.winsearch.firstRunDone", true);
+pref("mailnews.start_page.enabled", false);
+pref("spellchecker.dictionary", "de-DE");
