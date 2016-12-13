@@ -1,0 +1,9 @@
+// setup a common addressbook (not mandatory, but useful)
+pref("ldap_2.servers.ZentyalUser.auth.dn", "CN=[REAL_NAME],[BASE_DN]");
+pref("ldap_2.servers.ZentyalUser.auth.saslmech", "");
+pref("ldap_2.servers.ZentyalUser.description", "Zentyal User");
+pref("ldap_2.servers.ZentyalUser.filename", "ldap.mab");
+pref("ldap_2.servers.ZentyalUser.uri", "ldap://[MAIL_HOST]/[BASE_DN]??sub?(objectclass=*)");
+defaultPref("ldap_2.servers.ZentyalUser.maxHits", 100);
+defaultPref("ldap_2.autoComplete.useDirectory", true);
+defaultPref("ldap_2.autoComplete.directoryServer", "ldap_2.servers.ZentyalUser");
