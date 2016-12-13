@@ -1,0 +1,12 @@
+pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownCollected.notifications", "true");
+pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownCollected.notificationsManual", "true");
+pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownCollected.notificationsNotEmpty", "true");
+pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownCollected.notificationsSave", "false");
+pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownCollected.notificationsStart", "false");
+pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownCollected.periodicSync", "true");
+pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownCollected.periodicSyncInterval", "120");
+pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownCollected.url", "http://[MAIL_HOST]/SOGo/dav/[USER_NAME]/Contacts/collected/");
+pref("ldap_2.servers.ownCollected.description", "Used contacts");
+pref("ldap_2.servers.ownCollected.dirType", 2);
+pref("ldap_2.servers.ownCollected.filename", "[ABOOK_ID].mab");
+pref("mail.collect_addressbook", "moz-abmdbdirectory://[ABOOK_ID].mab");
