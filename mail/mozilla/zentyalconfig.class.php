@@ -20,7 +20,7 @@ class AdminCredentials
 {
 
 	/* You DEFINETIFLY should outsource your REAL INFORMATION in a modified way
-		 READ the $help variable above!
+		 READ the $help variable below!
 	*/
 	public		$credentials = ".zentyal-credentials";
 
@@ -63,7 +63,7 @@ class AdminCredentials
 	 $this->ad_bind		= 'cn=My Admin,CN=Users,DC=zentyal,DC=lan';
 	 // switch group functions on/off ~ false
 	 $this->use_groups	= true;
-	 $this->ad_pass		= 'create using: ./createCredentialPass "YoYo_Dine"';
+	 $this->ad_pass		= 'create using: zentyalconfig/createCredentialPass "YoYo_Dine"';
 	 $this->uuid		= 'create using: uuidgen';
 	 // end content
 
@@ -245,8 +245,7 @@ class Mail_Template_Connector extends Zentyal_Mail_Ldap_Connector
 {
 	protected $template	= '';
 	protected $templates	= array();
-	private   $accounts	= array();
-	
+		
 	private   $counter = array(	'IDENTITY_ID'	=> 0,
 					'SERVER_ID' 	=> 0,
 					'SMTP_ID'	=> 0,
