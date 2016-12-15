@@ -46,4 +46,6 @@ And then recreate a basic Thunderbird user dir within %APPDATA%
 > thunderbird -CreateProfile "%USERNAME% %APPDIR%"
 
 Execute Thunderbird from the desktop and acknowledge all certificates, enter your identification and so on.
-I need to do further documentation on this and also on playing with defaultPref, lockPref and clearPref.
+
+For now further documentation for german readers can be found at http://www.std-soft.com/hm-service/26-thunderbird-provisionieren-mit-zentyal
+
