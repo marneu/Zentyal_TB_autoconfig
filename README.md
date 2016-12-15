@@ -2,6 +2,8 @@
 
 A utility to deliver a Zentyal configuration to Thunderbird Clients (i.e. autoconfig).
 
+[Pull requests](./../../pulls) are welcome
+
 At least you need
 ```
 apt-get install php5 php5-ldap
