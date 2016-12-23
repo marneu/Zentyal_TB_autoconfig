@@ -8,5 +8,6 @@ pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownCollected.per
 pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownCollected.url", "http://[MAIL_HOST]/SOGo/dav/[USER_NAME]/Contacts/collected/");
 pref("ldap_2.servers.ownCollected.description", "Used contacts");
 pref("ldap_2.servers.ownCollected.dirType", 2);
-pref("ldap_2.servers.ownCollected.filename", "[ABOOK_ID].mab");
-pref("mail.collect_addressbook", "moz-abmdbdirectory://[ABOOK_ID].mab");
+pref("ldap_2.servers.ownCollected.filename", "abook-[ABOOK_ID].mab");
+pref("mail.collect_addressbook", "moz-abmdbdirectory://abook-[ABOOK_ID].mab");
+pref("ldap_2.servers.ownCollected.position", [ABOOK_ID]);
