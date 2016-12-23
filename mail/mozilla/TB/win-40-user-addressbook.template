@@ -9,4 +9,5 @@ pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownContacts.peri
 pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.ownContacts.url", "http://[MAIL_HOST]/SOGo/dav/[USER_NAME]/Contacts/personal/");
 pref("ldap_2.servers.ownContacts.description", "My contacts");
 pref("ldap_2.servers.ownContacts.dirType", 2);
-pref("ldap_2.servers.ownContacts.filename", "[ABOOK_ID].mab");
+pref("ldap_2.servers.ownContacts.filename", "abook-[ABOOK_ID].mab");
+pref("ldap_2.servers.ownContacts.position", [ABOOK_ID]);
