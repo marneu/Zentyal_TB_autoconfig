@@ -1,30 +1,30 @@
 // mandatory for users mail account
 // identity
-pref("mail.identity.[IDENTITY_ID].archive_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Archives");
-pref("mail.identity.[IDENTITY_ID].draft_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Drafts");
-pref("mail.identity.[IDENTITY_ID].fcc_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Sent");
-pref("mail.identity.[IDENTITY_ID].fullName", "[REAL_NAME]");
-pref("mail.identity.[IDENTITY_ID].smtpServer", "smtp1");
-pref("mail.identity.[IDENTITY_ID].stationery_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Templates");
-pref("mail.identity.[IDENTITY_ID].useremail", "[MAIL_ADDRESS]");
+pref("mail.identity.id[IDENTITY_ID].archive_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Archives");
+pref("mail.identity.id[IDENTITY_ID].draft_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Drafts");
+pref("mail.identity.id[IDENTITY_ID].fcc_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Sent");
+pref("mail.identity.id[IDENTITY_ID].fullName", "[REAL_NAME]");
+pref("mail.identity.id[IDENTITY_ID].smtpServer", "smtp1");
+pref("mail.identity.id[IDENTITY_ID].stationery_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Templates");
+pref("mail.identity.id[IDENTITY_ID].useremail", "[MAIL_ADDRESS]");
 // local setup
-pref("mail.identity.[IDENTITY_ID].organization", "YoYo Dine Corporation");
-pref("mail.identity.[IDENTITY_ID].directoryServer", "ldap_2.servers.ZentyalUser");
+pref("mail.identity.id[IDENTITY_ID].organization", "YoYo Dine Corporation");
+pref("mail.identity.id[IDENTITY_ID].directoryServer", "ldap_2.servers.ZentyalUser");
 // server
-pref("mail.server.[SERVER_ID].directory-rel", "[ProfD]ImapMail/[USER_NAME]");
-pref("mail.server.[SERVER_ID].hostname", "[MAIL_HOST]");
-pref("mail.server.[SERVER_ID].name", "[REAL_NAME]");
-pref("mail.server.[SERVER_ID].type", "imap");
-pref("mail.server.[SERVER_ID].userName", "[MAIL_ADDRESS]");
-pref("mail.server.[SERVER_ID].spamActionTargetAccount", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]");
-pref("mail.server.[SERVER_ID].spamActionTargetFolder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Junk");
-pref("mail.server.[SERVER_ID].socketType", 2);
-pref("mail.server.[SERVER_ID].empty_trash_on_exit", true);
-pref("mail.server.[SERVER_ID].keepUnreadOnly", false);
-pref("mail.server.[SERVER_ID].login_at_startup", true);
-pref("mail.server.[SERVER_ID].moveOnSpam", true);
-pref("mail.server.[SERVER_ID].useServerFilter", true);
+pref("mail.server.server[SERVER_ID].directory-rel", "[ProfD]ImapMail/[USER_NAME]");
+pref("mail.server.server[SERVER_ID].hostname", "[MAIL_HOST]");
+pref("mail.server.server[SERVER_ID].name", "[REAL_NAME]");
+pref("mail.server.server[SERVER_ID].type", "imap");
+pref("mail.server.server[SERVER_ID].userName", "[MAIL_ADDRESS]");
+pref("mail.server.server[SERVER_ID].spamActionTargetAccount", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]");
+pref("mail.server.server[SERVER_ID].spamActionTargetFolder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Spam");
+pref("mail.server.server[SERVER_ID].socketType", 2);
+pref("mail.server.server[SERVER_ID].empty_trash_on_exit", true);
+pref("mail.server.server[SERVER_ID].keepUnreadOnly", false);
+pref("mail.server.server[SERVER_ID].login_at_startup", true);
+pref("mail.server.server[SERVER_ID].moveOnSpam", true);
+pref("mail.server.server[SERVER_ID].useServerFilter", true);
 // account
-pref("mail.account.[ACCOUNT_ID].identities", "[IDENTITY_ID]");
-pref("mail.account.[ACCOUNT_ID].server", "[SERVER_ID]");
-pref("mail.accountmanager.defaultaccount", "[ACCOUNT_ID]");
+pref("mail.account.account[ACCOUNT_ID].identities", "id[IDENTITY_ID]");
+pref("mail.account.account[ACCOUNT_ID].server", "server[SERVER_ID]");
+pref("mail.accountmanager.defaultaccount", "account[ACCOUNT_ID]");
