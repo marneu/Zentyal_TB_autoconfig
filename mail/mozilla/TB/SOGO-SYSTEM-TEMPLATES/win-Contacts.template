@@ -1,0 +1,18 @@
+// shared SOGo addressbook
+pref("ldap_2.servers.[SOGO_SHARENAME].description", "[SOGO_NAME]");
+pref("ldap_2.servers.[SOGO_SHARENAME].position", [ABOOK_ID]);
+if( '[SOGO_READONLY]' != 'true' ) {
+	pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.[SOGO_SHARENAME].url", "http://[MAIL_HOST]/SOGo/dav[SOGO_OBJECT]/");
+	pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.[SOGO_SHARENAME].notifications", "true");
+	pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.[SOGO_SHARENAME].notificationsManual", "true");
+	pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.[SOGO_SHARENAME].notificationsNotEmpty", "true");
+	pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.[SOGO_SHARENAME].notificationsSave", "false");
+	pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.[SOGO_SHARENAME].notificationsStart", "false");
+	pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.[SOGO_SHARENAME].periodicSync", "true");
+	pref("extensions.ca.inverse.addressbook.groupdav.ldap_2.servers.[SOGO_SHARENAME].periodicSyncInterval", "60");
+	pref("ldap_2.servers.[SOGO_SHARENAME].dirType", 2);
+	pref("ldap_2.servers.[SOGO_SHARENAME].filename", "abook-[ABOOK_ID].mab");
+} else {
+	pref("ldap_2.servers.[SOGO_SHARENAME].uri", "carddav://[MAIL_HOST]/SOGo/dav[SOGO_OBJECT]/");
+	pref("ldap_2.servers.[SOGO_SHARENAME].filename", "ldap.mab");
+}
