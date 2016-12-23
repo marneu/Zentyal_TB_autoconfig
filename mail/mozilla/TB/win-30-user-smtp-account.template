@@ -1,8 +1,8 @@
 // mandatory if user shall send mail
-pref("mail.smtpserver.[SMTP_ID].authMethod", 3);
-pref("mail.smtpserver.[SMTP_ID].description", "Standard");
-pref("mail.smtpserver.[SMTP_ID].hostname", "[MAIL_HOST]");
-pref("mail.smtpserver.[SMTP_ID].port", 25);
-pref("mail.smtpserver.[SMTP_ID].try_ssl", 2);
-pref("mail.smtpserver.[SMTP_ID].username", "[SMTP_EMAIL]");
-pref("mail.smtpservers", "[SMTP_ID]");
+pref("mail.smtpserver.smtp[SMTP_ID].authMethod", 3);
+pref("mail.smtpserver.smtp[SMTP_ID].description", "Standard");
+pref("mail.smtpserver.smtp[SMTP_ID].hostname", "[MAIL_HOST]");
+pref("mail.smtpserver.smtp[SMTP_ID].port", 25);
+pref("mail.smtpserver.smtp[SMTP_ID].try_ssl", 2);
+pref("mail.smtpserver.smtp[SMTP_ID].username", "[SMTP_EMAIL]");
+pref("mail.smtpservers", "smtp[SMTP_ID]");
