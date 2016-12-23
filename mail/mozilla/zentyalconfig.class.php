@@ -10,7 +10,7 @@
  *  Provide a setup for Thunderbird clients in an automated fashion. Uses the
  *  configuration of a Zentyal 4.2 server (at the time of writing).
  *
- *  Version: 0.8
+ *  Version: 0.9
 */
 
 /*
@@ -20,7 +20,7 @@ class AdminCredentials
 {
 
 	/* You DEFINETIFLY should outsource your REAL INFORMATION in a modified way
-		 READ the $help variable below!
+		 READ the $help variable above!
 	*/
 	public		$credentials = ".zentyal-credentials";
 
@@ -61,9 +61,12 @@ class AdminCredentials
 	 $this->ad_users	= 'CN=Users,DC=zentyal,DC=lan';
 	 $this->ad_groups	= 'CN=Groups,DC=zentyal,DC=lan';
 	 $this->ad_bind		= 'cn=My Admin,CN=Users,DC=zentyal,DC=lan';
+	 $this->sql_host         = '127.0.0.1';
+	 $this->sql_user         = 'AUTOCONFIG';
+	 $this->sql_db           = 'sogo';
 	 // switch group functions on/off ~ false
 	 $this->use_groups	= true;
-	 $this->ad_pass		= 'create using: zentyalconfig/createCredentialPass "YoYo_Dine"';
+	 $this->ad_pass		= 'create using: ./createCredentialPass "YoYo_Dine"';
 	 $this->uuid		= 'create using: uuidgen';
 	 // end content
 
@@ -245,7 +248,7 @@ class Mail_Template_Connector extends Zentyal_Mail_Ldap_Connector
 {
 	protected $template	= '';
 	protected $templates	= array();
-		
+	
 	private   $counter = array(	'IDENTITY_ID'	=> 0,
 					'SERVER_ID' 	=> 0,
 					'SMTP_ID'	=> 0,
@@ -253,13 +256,14 @@ class Mail_Template_Connector extends Zentyal_Mail_Ldap_Connector
 					'ABOOK_ID'	=> 0
 					);
 	private   $tags    = array(
-				'IDENTITY_ID'	=> 'id',
-				'SERVER_ID' 	=> 'server',
-				'SMTP_ID'	=> 'smtp',
-				'ACCOUNT_ID' 	=> 'account',
-				'ABOOK_ID'	=> 'abook-'
+				'IDENTITY_ID'	=> '',
+				'SERVER_ID' 	=> '',
+				'SMTP_ID'	=> '',
+				'ACCOUNT_ID' 	=> '',
+				'ABOOK_ID'	=> ''
 				);
 	private   $allAccounts	= 'account1';
+	private	  $SOGoObjects  = array();
 
 	/*  TAKEN FROM:  https://gist.github.com/dahnielson/508447
 	  * FURTHER REF: "I found it in the online PHP Manual where 
@@ -335,16 +339,17 @@ EOT;
 EOT;
 	}
 	
-	private function setCounterTags( $filename, $userName ) {
+	private function setCounterTags( $filepath, $userName, $check_dup = true ) {
 
 		// just in case
-		if ( !file_exists($filename) ) return false;
+		if ( !file_exists($filepath) ) return false;
+		$filename = basename( $filepath ); 
 
-		// do not do twice
-		if ( array_search($filename, $this->templates) ) return false;
+		// do not do twice or overwrite previously configured with higher prio (user)
+		if ( $check_dup && array_search($filename, $this->templates) ) return false;
 		$this->templates[] = $filename;
 		
-		$intermediate = file_get_contents($filename);
+		$intermediate = file_get_contents($filepath);
 
 		foreach ( $this->tags as $tag => $value) {
 			if ( strpos( $intermediate, '[' . $tag .']' ) ) {
@@ -355,7 +360,10 @@ EOT;
 
 		$tag = 'CAL_ID';
 		if ( strpos( $intermediate, '[' . $tag .']' ) ) {
-			if (! $CAL_UUID = $this->getCalendarId($userName) )
+			$uriPos = strpos( $intermediate, '.uri",' )+8;
+			$uriPos2 = strpos( $intermediate, '");', $uriPos );
+			$calString = substr( $intermediate, $uriPos, $uriPos2-$uriPos );
+			if (! $CAL_UUID = $this->getCalendarId($userName . $calString) )
 				return;
 			$intermediate = str_replace('[' . $tag .']', $CAL_UUID, $intermediate);
 		}
@@ -391,6 +399,113 @@ EOT;
 			$this->template .= $this->startTemplateBlock($filename);
 			$this->template .= str_replace($match, $replace, $intermediate);
 			$this->template .= $this->endTemplateBlock($filename);
+		}
+	}
+
+	// retrieve authorized SOGo objects
+	public function getSOGoACL($uid) {
+	
+		// Create DB connection
+		$db = new mysqli($this->sql_host, $this->sql_user, $this->adminPass(), $this->sql_db);
+		// Check connection
+		if ($db->connect_error)
+			$this->error(560, "Unable to connect to SOGo database");
+
+		$authorized = array();
+	
+		// find all ACL tables
+		$sql = "SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'sogo%_acl'";
+		$result = $db->query($sql);
+		while ( $result->num_rows > 0 && $row = $result->fetch_assoc() ) {
+	
+			$save_c_object = '';
+			$authz = '';
+			$user_only = false;
+	
+			// find records within ACL table
+			$sql = "SELECT * FROM " . $row['table_name'] ." WHERE c_uid = '<default>' OR c_uid = '" . $uid . "' ORDER BY c_uid = '<default>'";
+			$res2 = $db->query($sql);
+			while ( $res2->num_rows > 0 && $row2 = $res2->fetch_assoc() ) {
+	
+				// rights for user overwite defaults otherwise continue
+				if ( $uid != $row2['c_uid'] && $user_only ) break;
+				elseif ( $uid == $row2['c_uid'] ) $user_only = true;
+	
+				// retrieve description only once
+				if ( $save_c_object != $row2['c_object'] ) {
+					$sql = "SELECT c_path2, c_path3, c_foldername FROM sogo_folder_info WHERE c_path1='Users' AND c_path='/Users" . $row2['c_object'] . "'";
+					$res3 = $db->query($sql);
+					if ( $res3->num_rows > 0 && $row3 = $res3->fetch_assoc() ) {
+						// look only for shares not for the users own records
+						if ( $uid == $row3['c_path2'] ) break;
+					}
+					$save_c_object = $row2['c_object'];
+					// setup the default array with read_only access
+					$authz = array('SOGO_OBJECT'	=> $row2['c_object'], 
+							'SOGO_TYPE'	=> $row3['c_path3'], 
+							'SOGO_NAME'	=> $row3['c_foldername'], 
+							'SOGO_READONLY' => 'true');
+
+					if ( 'Calendar' == $row3['c_path3'] ) {
+						$authz['SOGO_COLOR'] = '#FFFFFF';
+						$sql = "SELECT c_settings FROM sogo_user_profile WHERE c_uid='" . $row3['c_path2'] . "'";
+						$res4 = $db->query($sql);
+						if ( $res4->num_rows > 0 && $row4 = $res4->fetch_assoc() ) {
+							preg_match('/#([a-f0-9]{3}){1,2}\b/i', $row4['c_settings'], $match);
+							if ( !empty($match) )
+								$authz['SOGO_COLOR'] = $match[0];
+						}
+					}
+					else {
+						$authz['SOGO_SHARENAME'] = 'share' . preg_replace("/[^a-z0-9.]+/i", "", $row2['c_uid'] . $row3['c_foldername']);
+					}
+				}
+	
+				// check for modify rights
+				if ( $row2['c_role'] == 'PublicModifier' 
+					|| $row2['c_role'] == 'ObjectEditor' 
+					|| $row2['c_role'] == 'ConfidentialModifier' 
+					|| $row2['c_role'] == 'PrivateModifier' 
+					|| $row2['c_role'] == 'ObjectEraser' 
+					|| $row2['c_role'] == 'ObjectCreator' 
+					) {
+					// if modifying rights found in either way skip rest of this table
+					$authz['SOGO_READONLY'] = 'false';
+					break;
+				}
+			}
+			// add to return array only if rights found
+			if ( !empty($authz) ) $this->SOGoObjects[] = $authz;
+		}
+
+		$db->close();
+		return !empty($this->SOGoObjects);
+	}
+	
+	// add one SOGo template here
+	private function setSOGOtemplate($filename, $obj) {
+		if ( $intermediate = $this->setCounterTags($filename, $obj['SOGO_NAME'], false) ) {
+
+			$match	= array();
+			$replace= array();
+			foreach ( $obj as $key => $value) {
+				$match[] = '[' . $key . ']';
+				$replace[] = &$obj[$key];
+			}
+
+			// push on stock
+			$this->template .= $this->startTemplateBlock($filename);
+			$this->template .= str_replace($match, $replace, $intermediate);
+			$this->template .= $this->endTemplateBlock($filename);
+		}
+	}
+
+	// add all SOGo templates here
+	public function addSOGOtemplates($sogoBase) {
+		foreach ( $this->SOGoObjects as $obj ) {
+			if ( file_exists($fileName = $sogoBase . $obj['SOGO_TYPE'] . '.template') ) {
+				$this->setSOGoTemplate($fileName, $obj);
+			}
 		}
 	}
 
