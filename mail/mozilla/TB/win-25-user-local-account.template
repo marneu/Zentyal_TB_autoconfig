@@ -1,9 +1,9 @@
 // mandatory for users mail account
 // local folder setup
-pref("mail.server.[SERVER_ID].directory-rel", "[ProfD]Mail/Local Folders");
-pref("mail.server.[SERVER_ID].hostname", "Local Folders");
-pref("mail.server.[SERVER_ID].name", "Lokale Ordner");
-pref("mail.server.[SERVER_ID].type", "none");
-pref("mail.server.[SERVER_ID].userName", "nobody");
-pref("mail.account.[ACCOUNT_ID].server", "[SERVER_ID]");
-pref("mail.accountmanager.localfoldersserver", "[SERVER_ID]");
+pref("mail.server.server[SERVER_ID].directory-rel", "[ProfD]Mail/Local Folders");
+pref("mail.server.server[SERVER_ID].hostname", "Local Folders");
+pref("mail.server.server[SERVER_ID].name", "Lokale Ordner");
+pref("mail.server.server[SERVER_ID].type", "none");
+pref("mail.server.server[SERVER_ID].userName", "nobody");
+pref("mail.account.account[ACCOUNT_ID].server", "server[SERVER_ID]");
+pref("mail.accountmanager.localfoldersserver", "server[SERVER_ID]");
