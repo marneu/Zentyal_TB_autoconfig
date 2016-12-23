@@ -1,0 +1,16 @@
+// SOGO shared calendar
+pref("calendar.registry.[CAL_ID].cache.enabled", false);
+pref("calendar.registry.[CAL_ID].calendar-main-in-composite", true);
+defaultPref("calendar.registry.[CAL_ID].color", "[SOGO_COLOR]");
+pref("calendar.registry.[CAL_ID].imip.identity.key", "");
+pref("calendar.registry.[CAL_ID].initialSortOrderPos", 1);
+pref("calendar.registry.[CAL_ID].name", "[SOGO_NAME]");
+defaultPref("calendar.registry.[CAL_ID].refreshInterval", "30");
+defaultPref("calendar.registry.[CAL_ID].suppressAlarms", [SOGO_READONLY]);
+if( '[SOGO_READONLY]' != 'true' ) {
+	defaultPref("calendar.registry.[CAL_ID].readOnly", false);
+} else {
+	lockPref("calendar.registry.[CAL_ID].readOnly", true);
+}
+pref("calendar.registry.[CAL_ID].type", "caldav");
+pref("calendar.registry.[CAL_ID].uri", "https://[MAIL_HOST]/SOGo/dav[SOGO_OBJECT]/");
