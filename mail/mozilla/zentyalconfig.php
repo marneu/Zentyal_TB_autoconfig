@@ -9,7 +9,7 @@
  *  Provides a setup for Thunderbird clients in an automated fashion. Uses the
  *  configuration of a Zentyal 4.2 server (at the time of writing).
  *
- *  Version: 0.8
+ *  Version: 0.9
 */
 
 global $baseDir;
@@ -101,22 +101,30 @@ if ( $templateFiles = getTemplateFileNames($searchDir) ) {
 	}
 }
 
+// add SOGo authorized objects (Calendar/Contacts)
+$searchDir = 'SOGO-SYSTEM-TEMPLATES';
+if ( $t->getSOGoACL($USERNAME) )
+	$t->addSOGOtemplates($baseDir . $searchDir . '/' . $OS . '-');
+
+// do the following block only if groups are enabled at all
 if ( $t->use_groups ) {
 	// going into users groups
 	$UserGroups = $t->getGroups();
 	foreach ( $UserGroups as $templateGroup ) {
-		// add common group setup for all groups
-		$searchDir = 'COMMON_GROUP-templates';
-		if ( $templateFiles = getTemplateFileNames($searchDir) ) {
-			foreach ( $templateFiles as $filename ) {
-				$t->setGroupTemplate($templateGroup, $filename);
-			}
-		}
 		// get group template files for OS defaults
 		$searchDir = $templateGroup . '-templates';
 		if ( $templateFiles = getTemplateFileNames($searchDir) ) {
 			foreach ( $templateFiles as $filename ) {
 				$t->setGroupTemplate($templateGroup, $filename);
+			}
+		}
+		else {
+			// add common group setup for all groups
+			$searchDir = 'COMMON_GROUP-templates';
+			if ( $templateFiles = getTemplateFileNames($searchDir) ) {
+				foreach ( $templateFiles as $filename ) {
+					$t->setGroupTemplate($templateGroup, $filename);
+				}
 			}
 		}
 	}
