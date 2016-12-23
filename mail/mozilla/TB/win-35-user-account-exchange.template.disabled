@@ -1,0 +1,38 @@
+// identity exchange server during migration
+pref("mail.identity.id[IDENTITY_ID].archive_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Archives");
+pref("mail.identity.id[IDENTITY_ID].archive_folder_picker_mode", "0");
+pref("mail.identity.id[IDENTITY_ID].attach_signature", true);
+pref("mail.identity.id[IDENTITY_ID].compose_html", false);
+pref("mail.identity.id[IDENTITY_ID].doBcc", false);
+pref("mail.identity.id[IDENTITY_ID].draft_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Entw&APw-rfe");
+pref("mail.identity.id[IDENTITY_ID].drafts_folder_picker_mode", "1");
+pref("mail.identity.id[IDENTITY_ID].encryptionpolicy", 0);
+pref("mail.identity.id[IDENTITY_ID].fcc_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Gesendete Elemente");
+pref("mail.identity.id[IDENTITY_ID].fcc_folder_picker_mode", "1");
+pref("mail.identity.id[IDENTITY_ID].fullName", "[REAL_NAME]");
+pref("mail.identity.id[IDENTITY_ID].reply_on_top", 1);
+pref("mail.identity.id[IDENTITY_ID].sig_bottom", false);
+pref("mail.identity.id[IDENTITY_ID].sign_mail", false);
+pref("mail.identity.id[IDENTITY_ID].smtpServer", "smtp1");
+pref("mail.identity.id[IDENTITY_ID].stationery_folder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Templates");
+pref("mail.identity.id[IDENTITY_ID].tmpl_folder_picker_mode", "0");
+pref("mail.identity.id[IDENTITY_ID].useremail", "[MAIL_ADDRESS]");
+pref("mail.identity.id[IDENTITY_ID].valid", true);
+// server
+pref("mail.server.server[SERVER_ID].directory-rel", "[ProfD]ImapMail/Exchange");
+pref("mail.server.server[SERVER_ID].hostname", "172.17.0.100");
+pref("mail.server.server[SERVER_ID].name", "[USER_NAME] (ALT)");
+pref("mail.server.server[SERVER_ID].trash_folder_name", "Gelöschte Elemente");
+pref("mail.server.server[SERVER_ID].type", "imap");
+pref("mail.server.server[SERVER_ID].userName", "[USER_NAME]");
+pref("mail.server.server[SERVER_ID].spamActionTargetAccount", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]");
+pref("mail.server.server[SERVER_ID].spamActionTargetFolder", "imap://[USER_NAME]%40[MAIL_DOMAIN]@[MAIL_HOST]/Junk-E-Mail");
+pref("mail.server.server[SERVER_ID].socketType", 2);
+pref("mail.server.server[SERVER_ID].empty_trash_on_exit", true);
+pref("mail.server.server[SERVER_ID].keepUnreadOnly", false);
+pref("mail.server.server[SERVER_ID].login_at_startup", true);
+pref("mail.server.server[SERVER_ID].moveOnSpam", true);
+pref("mail.server.server[SERVER_ID].useServerFilter", true);
+// account
+pref("mail.account.account[ACCOUNT_ID].identities", "id[IDENTITY_ID]");
+pref("mail.account.account[ACCOUNT_ID].server", "server[SERVER_ID]");
