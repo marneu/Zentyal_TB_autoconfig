@@ -9,11 +9,8 @@
  *  Provides a setup for Thunderbird clients in an automated fashion. Uses the
  *  configuration of a Zentyal 4.2 server (at the time of writing).
  *
- *  Version: 0.9
+ *  Version: 0.91
 */
-
-global $baseDir;
-global $OS;
 
 // autoconfiguration base dir (i.e. where the templates live)
 $baseDir = 'TB';
@@ -62,8 +59,7 @@ try {
 }
 
 // contruct our search file filter
-function getTemplateFileNames($request = '') {
-	global $baseDir, $OS;
+function getTemplateFileNames($baseDir, $OS, $request = '') {
 	if (!empty( $request ) ) {
 		if (! is_dir($baseDir . $request) )
 			return false;
@@ -87,7 +83,7 @@ $t = new Mail_Template_Connector;
 $t->setZentyalUser($USERNAME);
 
 // get template files for OS defaults
-if ( $templateFiles = getTemplateFileNames() ) {
+if ( $templateFiles = getTemplateFileNames($baseDir, $OS) ) {
 	foreach ( $templateFiles as $filename ) {
 		$t->setTemplate($filename);
 	}
@@ -95,7 +91,7 @@ if ( $templateFiles = getTemplateFileNames() ) {
 
 // do user specific files (if such)
 $searchDir = $USERNAME . '-templates';
-if ( $templateFiles = getTemplateFileNames($searchDir) ) {
+if ( $templateFiles = getTemplateFileNames($baseDir, $OS, $searchDir) ) {
 	foreach ( $templateFiles as $filename ) {
 		$t->setTemplate($filename);
 	}
@@ -113,7 +109,7 @@ if ( $t->use_groups ) {
 	foreach ( $UserGroups as $templateGroup ) {
 		// get group template files for OS defaults
 		$searchDir = $templateGroup . '-templates';
-		if ( $templateFiles = getTemplateFileNames($searchDir) ) {
+		if ( $templateFiles = getTemplateFileNames($baseDir, $OS, $searchDir) ) {
 			foreach ( $templateFiles as $filename ) {
 				$t->setGroupTemplate($templateGroup, $filename);
 			}
@@ -121,7 +117,7 @@ if ( $t->use_groups ) {
 		else {
 			// add common group setup for all groups
 			$searchDir = 'COMMON_GROUP-templates';
-			if ( $templateFiles = getTemplateFileNames($searchDir) ) {
+			if ( $templateFiles = getTemplateFileNames($baseDir, $OS, $searchDir) ) {
 				foreach ( $templateFiles as $filename ) {
 					$t->setGroupTemplate($templateGroup, $filename);
 				}
@@ -133,7 +129,7 @@ if ( $t->use_groups ) {
 
 // setup the final account counter
 $searchDir = 'FINAL';
-if ( $templateFiles = getTemplateFileNames($searchDir) ) {
+if ( $templateFiles = getTemplateFileNames($baseDir, $OS, $searchDir) ) {
 	foreach ( $templateFiles as $filename ) {
 		$t->setTemplate($filename);
 	}
